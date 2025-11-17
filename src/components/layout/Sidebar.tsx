@@ -13,6 +13,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface SidebarProps {
   userRole: 'manager' | 'attendant' | 'patient';
@@ -20,6 +21,7 @@ interface SidebarProps {
 
 export function Sidebar({ userRole }: SidebarProps) {
   const location = useLocation();
+  const { signOut } = useAuth();
 
   const managerNavItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/manager' },
@@ -87,6 +89,7 @@ export function Sidebar({ userRole }: SidebarProps) {
         </Button>
         <Button
           variant="ghost"
+          onClick={signOut}
           className="w-full justify-start text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
         >
           <LogOut className="mr-3 h-4 w-4" />
