@@ -7,10 +7,14 @@ import {
   MessageSquare,
   Activity,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  LogIn
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Index = () => {
+  const { user, signOut } = useAuth();
+  
   const userTypes = [
     {
       title: 'Gerente',
@@ -54,6 +58,21 @@ const Index = () => {
             Plataforma integrada de atendimento médico que unifica todos os canais de comunicação
             em uma única interface inteligente
           </p>
+          
+          <div className="mt-8 flex gap-4 justify-center">
+            {user ? (
+              <Button onClick={signOut} variant="outline" size="lg">
+                Sair
+              </Button>
+            ) : (
+              <Button asChild size="lg">
+                <Link to="/auth">
+                  <LogIn className="mr-2 h-5 w-5" />
+                  Entrar / Criar Conta
+                </Link>
+              </Button>
+            )}
+          </div>
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">
